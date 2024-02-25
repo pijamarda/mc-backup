@@ -8,20 +8,19 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("What is your name?");
-        var name = Console.ReadLine();
-        var currentDate = DateTime.Now;
-        Console.WriteLine($"{Environment.NewLine}Hello, {name}, on {currentDate:d} at {currentDate:t}");
-        Console.WriteLine($"{Environment.NewLine}Press any key to exit.");
-        //Console.ReadKey(true);
-        CompressTest();
+        var currentDate = DateTime.Now.ToString("yyyyMMdd");
+        string folderWorldArg = Environment.GetCommandLineArgs()[1];
+        Console.WriteLine("EXecuting backup of minecraft world");        
+        Console.WriteLine($"{Environment.NewLine}Zipping, {folderWorldArg}, on {currentDate}");                
+        CompressTest(folderWorldArg);
     }
 
-    static void CompressTest()
-    {
-        string startPath = @"output/start";
-        string zipPath = @"output/result.zip";
-        string extractPath = @"output/extract";
+    static void CompressTest(string startPath)
+    {        
+        string zipPath = @"output/backup/";
+        string extractPath = @"output/backup";
+        var currentDate = DateTime.Now.ToString("yyyyMMdd");
+        string fileToSave = zipPath + startPath + currentDate + ".zip";
 
         if (File.Exists(zipPath))
         {
@@ -42,7 +41,9 @@ class Program
             Console.WriteLine(e.Message);
         }
 
-        ZipFile.CreateFromDirectory(startPath, zipPath);
-        ZipFile.ExtractToDirectory(zipPath, extractPath);
+        string inputFolder = startPath + @"/world/";
+
+        ZipFile.CreateFromDirectory(inputFolder, fileToSave);
+        ZipFile.ExtractToDirectory(fileToSave, extractPath);
     }
 }

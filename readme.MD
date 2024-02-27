@@ -4,5 +4,7 @@ dotnet publish -r linux-arm64
 
 I added these two lines so the executable is self-contained
 
+```
 <PublishSingleFile>true</PublishSingleFile>
 <SelfContained>true</SelfContained>
+```

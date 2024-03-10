@@ -1,3 +1,5 @@
 output/
 obj/
 bin/
+!bin/Release/net8.0/linux-arm64/publish/mc-backup
+!bin/Release/net8.0/linux-x64/publish/mc-backup

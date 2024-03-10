@@ -44,6 +44,6 @@ class Program
         string inputFolder = startPath + @"/world/";
 
         ZipFile.CreateFromDirectory(inputFolder, fileToSave);
-        ZipFile.ExtractToDirectory(fileToSave, extractPath);
+        //ZipFile.ExtractToDirectory(fileToSave, extractPath);
     }
 }

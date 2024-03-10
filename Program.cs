@@ -7,12 +7,22 @@ namespace McBackup;
 class Program
 {
     static void Main(string[] args)
-    {
-        var currentDate = DateTime.Now.ToString("yyyyMMdd");
-        string folderWorldArg = Environment.GetCommandLineArgs()[1];
-        Console.WriteLine("EXecuting backup of minecraft world");        
-        Console.WriteLine($"{Environment.NewLine}Zipping, {folderWorldArg}, on {currentDate}");                
-        CompressTest(folderWorldArg);
+    {   
+        string[] arguments = Environment.GetCommandLineArgs();
+        string folderWorldArg = "";
+        if (arguments.Length != 2)
+        {
+            Console.WriteLine("Please indicate the folder of the server where the world is");
+            Console.WriteLine("You can use the following command: mc-backup /path/to/server");
+        }
+        else
+        {
+            folderWorldArg = Environment.GetCommandLineArgs()[1];
+            Console.WriteLine("EXecuting backup of minecraft world");        
+            Console.WriteLine($"{Environment.NewLine}Zipping, {folderWorldArg}");                
+            CompressTest(folderWorldArg);
+        } 
+        
     }
 
     static void CompressTest(string startPath)
@@ -22,9 +32,9 @@ class Program
         var currentDate = DateTime.Now.ToString("yyyyMMdd");
         string fileToSave = zipPath + startPath + currentDate + ".zip";
 
-        if (File.Exists(zipPath))
+        if (File.Exists(fileToSave))
         {
-            File.Delete(zipPath);
+            File.Delete(fileToSave);
         }
 
         try
